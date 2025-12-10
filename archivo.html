@@ -136,6 +136,12 @@
             <div class="nav-item" onclick="nav('tema3', this)">🌑 Módulo 3: La Luna</div>
             <div class="nav-item" onclick="nav('tema4', this)">☄️ Módulo 4: Asteroides</div>
             
+            <div class="nav-header">Cuestionarios</div>
+            <div class="nav-item" onclick="nav('quiz1', this)">📋 Quiz Módulo 1</div>
+            <div class="nav-item" onclick="nav('quiz2', this)">📋 Quiz Módulo 2</div>
+            <div class="nav-item" onclick="nav('quiz3', this)">📋 Quiz Módulo 3</div>
+            <div class="nav-item" onclick="nav('quiz4', this)">📋 Quiz Módulo 4</div>
+            
             <div class="nav-header">Evaluación</div>
             <div class="nav-item" onclick="nav('examen', this)">📝 Examen Final</div>
         </aside>
@@ -277,6 +283,190 @@
                     <div id="resultadoFinal" class="score-final"></div>
                 </div>
             </section>
+
+            <section id="quiz1" class="module">
+                <h1>Cuestionario Módulo 1: El Sol</h1>
+                <div class="quiz-box">
+                    <form id="quizForm1">
+                        <div class="question">
+                            <p><strong>1. ¿Qué tipo de estrella es el Sol?</strong></p>
+                            <label><input type="radio" name="q1_1" value="a"> Enana Roja</label>
+                            <label><input type="radio" name="q1_1" value="b"> Enana Amarilla (Tipo G)</label>
+                            <label><input type="radio" name="q1_1" value="c"> Gigante Azul</label>
+                            <div id="fbq1_1"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>2. ¿Cuál es la temperatura en la superficie del Sol?</strong></p>
+                            <label><input type="radio" name="q1_2" value="a"> 1.500°C</label>
+                            <label><input type="radio" name="q1_2" value="b"> 5.500°C</label>
+                            <label><input type="radio" name="q1_2" value="c"> 10.000°C</label>
+                            <div id="fbq1_2"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>3. ¿Cuántos millones de años tiene aproximadamente el Sol?</strong></p>
+                            <label><input type="radio" name="q1_3" value="a"> 2.300</label>
+                            <label><input type="radio" name="q1_3" value="b"> 4.600</label>
+                            <label><input type="radio" name="q1_3" value="c"> 8.900</label>
+                            <div id="fbq1_3"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>4. ¿Cuál es la función principal del Sol en nuestro sistema?</strong></p>
+                            <label><input type="radio" name="q1_4" value="a"> Crear eclipses</label>
+                            <label><input type="radio" name="q1_4" value="b"> Proporcionar luz, calor y mantener la órbita de los planetas</label>
+                            <label><input type="radio" name="q1_4" value="c"> Producir lluvia</label>
+                            <div id="fbq1_4"></div>
+                        </div>
+
+                        <button type="button" class="btn-primary" onclick="calificarQuiz('quizForm1', {q1_1:'b', q1_2:'b', q1_3:'b', q1_4:'b'}, 'resultado1')">Enviar Respuestas</button>
+                    </form>
+                    <div id="resultado1" class="score-final"></div>
+                </div>
+            </section>
+
+            <section id="quiz2" class="module">
+                <h1>Cuestionario Módulo 2: Los Planetas</h1>
+                <div class="quiz-box">
+                    <form id="quizForm2">
+                        <div class="question">
+                            <p><strong>1. ¿Cuál es el planeta más pequeño del sistema solar?</strong></p>
+                            <label><input type="radio" name="q2_1" value="a"> Venus</label>
+                            <label><input type="radio" name="q2_1" value="b"> Mercurio</label>
+                            <label><input type="radio" name="q2_1" value="c"> Marte</label>
+                            <div id="fbq2_1"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>2. ¿Qué característica distingue a los planetas rocosos?</strong></p>
+                            <label><input type="radio" name="q2_2" value="a"> Tienen anillos visibles</label>
+                            <label><input type="radio" name="q2_2" value="b"> Tienen una superficie sólida</label>
+                            <label><input type="radio" name="q2_2" value="c"> Son gaseosos</label>
+                            <div id="fbq2_2"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>3. ¿Cuál es el único planeta con agua líquida en abundancia?</strong></p>
+                            <label><input type="radio" name="q2_3" value="a"> Venus</label>
+                            <label><input type="radio" name="q2_3" value="b"> Marte</label>
+                            <label><input type="radio" name="q2_3" value="c"> Tierra</label>
+                            <div id="fbq2_3"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>4. ¿Qué planeta es conocido por sus espectaculares anillos?</strong></p>
+                            <label><input type="radio" name="q2_4" value="a"> Júpiter</label>
+                            <label><input type="radio" name="q2_4" value="b"> Saturno</label>
+                            <label><input type="radio" name="q2_4" value="c"> Urano</label>
+                            <div id="fbq2_4"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>5. ¿Cuál es el planeta más grande del sistema solar?</strong></p>
+                            <label><input type="radio" name="q2_5" value="a"> Saturno</label>
+                            <label><input type="radio" name="q2_5" value="b"> Júpiter</label>
+                            <label><input type="radio" name="q2_5" value="c"> Neptuno</label>
+                            <div id="fbq2_5"></div>
+                        </div>
+
+                        <button type="button" class="btn-primary" onclick="calificarQuiz('quizForm2', {q2_1:'b', q2_2:'b', q2_3:'c', q2_4:'b', q2_5:'b'}, 'resultado2')">Enviar Respuestas</button>
+                    </form>
+                    <div id="resultado2" class="score-final"></div>
+                </div>
+            </section>
+
+            <section id="quiz3" class="module">
+                <h1>Cuestionario Módulo 3: La Luna</h1>
+                <div class="quiz-box">
+                    <form id="quizForm3">
+                        <div class="question">
+                            <p><strong>1. ¿Cuál es la principal función de la Luna para la Tierra?</strong></p>
+                            <label><input type="radio" name="q3_1" value="a"> Dar luz durante la noche</label>
+                            <label><input type="radio" name="q3_1" value="b"> Controlar las mareas y estabilizar el eje terrestre</label>
+                            <label><input type="radio" name="q3_1" value="c"> Producir oxígeno</label>
+                            <div id="fbq3_1"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>2. ¿Cuántas lunas tiene la Tierra?</strong></p>
+                            <label><input type="radio" name="q3_2" value="a"> Ninguna</label>
+                            <label><input type="radio" name="q3_2" value="b"> Una</label>
+                            <label><input type="radio" name="q3_2" value="c"> Tres</label>
+                            <div id="fbq3_2"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>3. ¿Qué causa las mareas en los océanos?</strong></p>
+                            <label><input type="radio" name="q3_3" value="a"> El viento</label>
+                            <label><input type="radio" name="q3_3" value="b"> La gravedad de la Luna</label>
+                            <label><input type="radio" name="q3_3" value="c"> El movimiento de la Tierra</label>
+                            <div id="fbq3_3"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>4. ¿Cuál es el nombre del satélite de la Tierra?</strong></p>
+                            <label><input type="radio" name="q3_4" value="a"> Europa</label>
+                            <label><input type="radio" name="q3_4" value="b"> La Luna</label>
+                            <label><input type="radio" name="q3_4" value="c"> Titán</label>
+                            <div id="fbq3_4"></div>
+                        </div>
+
+                        <button type="button" class="btn-primary" onclick="calificarQuiz('quizForm3', {q3_1:'b', q3_2:'b', q3_3:'b', q3_4:'b'}, 'resultado3')">Enviar Respuestas</button>
+                    </form>
+                    <div id="resultado3" class="score-final"></div>
+                </div>
+            </section>
+
+            <section id="quiz4" class="module">
+                <h1>Cuestionario Módulo 4: Asteroides y Cometas</h1>
+                <div class="quiz-box">
+                    <form id="quizForm4">
+                        <div class="question">
+                            <p><strong>1. ¿Cuál es la composición principal de un cometa?</strong></p>
+                            <label><input type="radio" name="q4_1" value="a"> Roca pura</label>
+                            <label><input type="radio" name="q4_1" value="b"> Hielo y polvo ("bola de nieve sucia")</label>
+                            <label><input type="radio" name="q4_1" value="c"> Metal líquido</label>
+                            <div id="fbq4_1"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>2. ¿Por qué los cometas tienen cola?</strong></p>
+                            <label><input type="radio" name="q4_2" value="a"> Porque se mueven rápido</label>
+                            <label><input type="radio" name="q4_2" value="b"> Porque el hielo se sublima al acercarse al Sol</label>
+                            <label><input type="radio" name="q4_2" value="c"> Porque son esféricos</label>
+                            <div id="fbq4_2"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>3. ¿Dónde se encuentra la mayoría de asteroides?</strong></p>
+                            <label><input type="radio" name="q4_3" value="a"> Cinturón de Kuiper</label>
+                            <label><input type="radio" name="q4_3" value="b"> Entre Marte y Júpiter (Cinturón de Asteroides)</label>
+                            <label><input type="radio" name="q4_3" value="c"> Alrededor de la Luna</label>
+                            <div id="fbq4_3"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>4. ¿Cuál es la diferencia principal entre un asteroide y un cometa?</strong></p>
+                            <label><input type="radio" name="q4_4" value="a"> El tamaño</label>
+                            <label><input type="radio" name="q4_4" value="b"> Los asteroides son rocosos sin cola, los cometas tienen hielo y cola</label>
+                            <label><input type="radio" name="q4_4" value="c"> El color</label>
+                            <div id="fbq4_4"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>5. ¿Qué es la cola de un cometa?</strong></p>
+                            <label><input type="radio" name="q4_5" value="a"> Una prolongación del núcleo</label>
+                            <label><input type="radio" name="q4_5" value="b"> Gas y polvo ionizado que apunta alejándose del Sol</label>
+                            <label><input type="radio" name="q4_5" value="c"> Una sombra</label>
+                            <div id="fbq4_5"></div>
+                        </div>
+
+                        <button type="button" class="btn-primary" onclick="calificarQuiz('quizForm4', {q4_1:'b', q4_2:'b', q4_3:'b', q4_4:'b', q4_5:'b'}, 'resultado4')">Enviar Respuestas</button>
+                    </form>
+                    <div id="resultado4" class="score-final"></div>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -316,6 +506,50 @@
             finalDiv.innerHTML = puntaje === total ? 
                 `<div style="color:green">🌟 ¡PERFECTO! ${puntaje}/${total}</div>` : 
                 `<div style="color:orange">⚠️ OBTUVISTE ${puntaje}/${total}.</div>`;
+        }
+
+        function calificarQuiz(formId, respuestas, resultadoId) {
+            let puntaje = 0;
+            const form = document.getElementById(formId);
+            document.querySelectorAll('[id^="fbq"]').forEach(el => el.innerHTML = '');
+
+            for (const [key, value] of Object.entries(respuestas)) {
+                const input = form.querySelector(`[name="${key}"]`);
+                const divId = `fb${key}`;
+                if(input && input.value === value) {
+                    puntaje++;
+                    document.getElementById(divId).innerHTML = `<div class="msg-correct">✅ ¡Correcto!</div>`;
+                } else {
+                    let explicacion = '';
+                    switch(key) {
+                        case 'q1_1': explicacion = 'El Sol es una Enana Amarilla (Tipo G).'; break;
+                        case 'q1_2': explicacion = 'La temperatura en la superficie del Sol es de aproximadamente 5.500°C.'; break;
+                        case 'q1_3': explicacion = 'El Sol tiene aproximadamente 4.600 millones de años.'; break;
+                        case 'q1_4': explicacion = 'El Sol proporciona luz, calor y mantiene la órbita de los planetas.'; break;
+                        case 'q2_1': explicacion = 'Mercurio es el planeta más pequeño del sistema solar.'; break;
+                        case 'q2_2': explicacion = 'Los planetas rocosos tienen una superficie sólida.'; break;
+                        case 'q2_3': explicacion = 'La Tierra es el único planeta con agua líquida en abundancia.'; break;
+                        case 'q2_4': explicacion = 'Saturno es conocido por sus espectaculares anillos.'; break;
+                        case 'q2_5': explicacion = 'Júpiter es el planeta más grande del sistema solar.'; break;
+                        case 'q3_1': explicacion = 'La Luna controla las mareas y estabiliza el eje terrestre.'; break;
+                        case 'q3_2': explicacion = 'La Tierra tiene una luna.'; break;
+                        case 'q3_3': explicacion = 'Las mareas en los océanos son causadas por la gravedad de la Luna.'; break;
+                        case 'q3_4': explicacion = 'El satélite de la Tierra es La Luna.'; break;
+                        case 'q4_1': explicacion = 'Los cometas están compuestos principalmente de hielo y polvo.'; break;
+                        case 'q4_2': explicacion = 'Los cometas tienen cola porque el hielo se sublima al acercarse al Sol.'; break;
+                        case 'q4_3': explicacion = 'La mayoría de los asteroides se encuentran en el cinturón de asteroides entre Marte y Júpiter.'; break;
+                        case 'q4_4': explicacion = 'Los asteroides son rocosos sin cola, los cometas tienen hielo y cola.'; break;
+                        case 'q4_5': explicacion = 'La cola de un cometa es gas y polvo ionizado que apunta alejándose del Sol.'; break;
+                    }
+                    document.getElementById(divId).innerHTML = `<div class="msg-wrong">❌ Incorrecto. ${explicacion}</div>`;
+                }
+            }
+
+            const finalDiv = document.getElementById(resultadoId);
+            finalDiv.style.display = 'block';
+            finalDiv.innerHTML = puntaje === Object.keys(respuestas).length ? 
+                `<div style="color:green">🌟 ¡PERFECTO! ${puntaje}/${Object.keys(respuestas).length}</div>` : 
+                `<div style="color:orange">⚠️ OBTUVISTE ${puntaje}/${Object.keys(respuestas).length}.</div>`;
         }
     </script>
 </body>
