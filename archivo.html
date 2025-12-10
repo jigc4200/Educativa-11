@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSolar - Versión Rápida</title>
+    <style>
+        /* --- ESTILOS VISUALES (CSS) --- */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --bg: #f4f6f9;
+            --white: #ffffff;
+            --text: #333333;
+            --success: #27ae60;
+            --error: #c0392b;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0 2rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 1px; }
+        .logo span { color: var(--secondary); }
+
+        /* LAYOUT */
+        .layout { display: flex; flex: 1; overflow: hidden; }
+
+        /* MENÚ LATERAL */
+        aside {
+            width: 260px;
+            background: var(--white);
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            overflow-y: auto;
+        }
+        
+        .nav-header { padding: 10px 25px; font-size: 0.85rem; text-transform: uppercase; color: #888; font-weight: bold; margin-top: 10px; }
+        .nav-item { padding: 12px 25px; cursor: pointer; transition: 0.2s; color: #555; font-weight: 500; border-left: 4px solid transparent; }
+        .nav-item:hover { background-color: #f8f9fa; color: var(--primary); }
+        .nav-item.active { background-color: #e8f4fc; color: var(--secondary); border-left: 4px solid var(--secondary); font-weight: bold; }
+
+        /* CONTENIDO */
+        main { flex: 1; padding: 40px; overflow-y: auto; scroll-behavior: smooth; }
+
+        .module { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .module.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h1 { color: var(--primary); border-bottom: 3px solid var(--secondary); padding-bottom: 10px; display: inline-block; margin-bottom: 20px;}
+        h2 { color: var(--secondary); margin-top: 35px; border-left: 4px solid var(--primary); padding-left: 10px;}
+        p { line-height: 1.7; font-size: 1.05rem; color: #444; }
+
+        /* IMÁGENES OPTIMIZADAS */
+        img { transition: transform 0.3s; }
+        img:hover { transform: scale(1.02); }
+
+        .banner-img { width: 100%; height: 220px; object-fit: cover; border-radius: 10px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .content-img { max-width: 100%; border-radius: 8px; margin: 20px auto; display: block; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-height: 300px; }
+
+        /* CUADRÍCULA COMPARATIVA (Módulo 4) */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .comparison-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--secondary);
+        }
+        .comparison-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        /* TARJETAS PLANETAS */
+        .planet-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 20px; }
+        .card { background: var(--white); padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center; border-top: 4px solid var(--secondary); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .card img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 3px solid #ecf0f1; }
+
+        /* TEST */
+        .quiz-box { background: var(--white); padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); max-width: 800px; margin: 0 auto; }
+        .question { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .options label { display: block; padding: 10px; cursor: pointer; border-radius: 5px; margin: 5px 0; border: 1px solid transparent; }
+        .options label:hover { background-color: #f0f7ff; border-color: #d0e3ff; }
+        
+        .btn-primary { background-color: var(--secondary); color: white; padding: 12px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem; width: 100%; margin-top: 10px; font-weight: bold; }
+        .btn-primary:hover { background-color: #2980b9; }
+
+        .msg-correct { color: var(--success); font-weight: bold; margin-top: 8px; padding: 5px; background: #eafaf1; border-radius: 4px; display: inline-block;}
+        .msg-wrong { color: var(--error); margin-top: 8px; padding: 5px; background: #fdeaea; border-radius: 4px; display: inline-block;}
+        .score-final { margin-top: 30px; padding: 20px; text-align: center; font-size: 1.2rem; font-weight: bold; border-radius: 8px; display: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Edu<span>Space</span> LMS</div>
+        <div>Modo: Optimizado (Rápido)</div>
+    </header>
+
+    <div class="layout">
+        <aside>
+            <div class="nav-header">Introducción</div>
+            <div class="nav-item active" onclick="nav('inicio', this)">🏠 Inicio y Objetivos</div>
+            
+            <div class="nav-header">Contenido Teórico</div>
+            <div class="nav-item" onclick="nav('tema1', this)">☀️ Módulo 1: El Sol</div>
+            <div class="nav-item" onclick="nav('tema2', this)">🪐 Módulo 2: Planetas</div>
+            <div class="nav-item" onclick="nav('tema3', this)">🌑 Módulo 3: La Luna</div>
+            <div class="nav-item" onclick="nav('tema4', this)">☄️ Módulo 4: Asteroides</div>
+            
+            <div class="nav-header">Evaluación</div>
+            <div class="nav-item" onclick="nav('examen', this)">📝 Examen Final</div>
+        </aside>
+
+        <main>
+            
+            <section id="inicio" class="module active">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Solar_sys8.jpg/800px-Solar_sys8.jpg" alt="Sistema Solar Banner" class="banner-img">
+                <h1>Bienvenido al Curso de Astronomía Básica</h1>
+                <p>Bienvenido a <strong>EduSpace</strong>. Esta plataforma LMS ha sido diseñada para presentar de forma interactiva los conceptos fundamentales de nuestro sistema solar.</p>
+                <div style="background: #e8f4fc; padding: 20px; border-radius: 8px; margin-top: 20px; border-left: 5px solid var(--secondary);">
+                    <h3>🎯 Competencias a Desarrollar:</h3>
+                    <ul>
+                        <li>Identificar la estructura central del sistema (El Sol).</li>
+                        <li>Clasificar los planetas en rocosos y gaseosos.</li>
+                        <li>Comprender la importancia de nuestro satélite natural.</li>
+                        <li>Diferenciar entre asteroides y cometas.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="tema1" class="module">
+                <h1>Módulo 1: La Estrella Madre</h1>
+                <p>El Sol es el objeto más importante de nuestro sistema, conteniendo el <strong>99.86%</strong> de toda la masa del mismo.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg/640px-The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Dynamics_Observatory_-_20100819.jpg" alt="El Sol" class="content-img">
+                <h2>Datos Críticos</h2>
+                <ul>
+                    <li><strong>Tipo:</strong> Estrella Enana Amarilla (Tipo G).</li>
+                    <li><strong>Edad:</strong> 4.600 millones de años.</li>
+                    <li><strong>Temperatura:</strong> 5.500°C en superficie.</li>
+                </ul>
+            </section>
+
+            <section id="tema2" class="module">
+                <h1>Módulo 2: Los Planetas</h1>
+                <h2>Planetas Interiores (Rocosos)</h2>
+                <div class="planet-grid">
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Mercury_in_true_color.jpg/200px-Mercury_in_true_color.jpg" alt="Mercurio">
+                        <h3>Mercurio</h3>
+                        <p>Superficie llena de cráteres, sin lunas.</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Venus-real_color.jpg/200px-Venus-real_color.jpg" alt="Venus">
+                        <h3>Venus</h3>
+                        <p>Atmósfera tóxica y temperaturas extremas.</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/200px-The_Earth_seen_from_Apollo_17.jpg" alt="Tierra">
+                        <h3>Tierra</h3>
+                        <p>Único con océanos de agua líquida.</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/200px-OSIRIS_Mars_true_color.jpg" alt="Marte">
+                        <h3>Marte</h3>
+                        <p>Objetivo principal de la exploración espacial.</p>
+                    </div>
+                </div>
+
+                <h2>Planetas Exteriores (Gaseosos)</h2>
+                <div class="planet-grid">
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg/200px-Jupiter_and_its_shrunken_Great_Red_Spot.jpg" alt="Júpiter">
+                        <h3>Júpiter</h3>
+                        <p>El rey de los planetas, masivo y tormentoso.</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/300px-Saturn_during_Equinox.jpg" alt="Saturno">
+                        <h3>Saturno</h3>
+                        <p>Famoso por sus complejos anillos de hielo.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tema3" class="module">
+                <h1>Módulo 3: La Luna</h1>
+                <p>La Luna es el único satélite natural de la Tierra y es vital para la vida tal como la conocemos.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/400px-FullMoon2010.jpg" alt="La Luna" class="content-img" style="max-height: 350px;">
+                <h2>Importancia</h2>
+                <ul>
+                    <li><strong>Mareas:</strong> La gravedad de la Luna mueve los océanos.</li>
+                    <li><strong>Estabilidad:</strong> Mantiene estable el eje de la Tierra.</li>
+                </ul>
+            </section>
+
+            <section id="tema4" class="module">
+                <h1>Módulo 4: Asteroides y Cometas</h1>
+                <p>El sistema solar está lleno de escombros fascinantes.</p>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h2>☄️ Cometas</h2>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/C2020F3_%28NEOWISE%29_2020-07-13.jpg/640px-C2020F3_%28NEOWISE%29_2020-07-13.jpg" 
+                             alt="Cometa Neowise">
+                        <p>Son "bolas de nieve sucia". Cuando se acercan al Sol, el hielo se evapora creando una cola brillante.</p>
+                    </div>
+
+                    <div class="comparison-card">
+                        <h2>🪨 Asteroides</h2>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/243_ida.jpg/400px-243_ida.jpg" 
+                             alt="Asteroide Ida">
+                        <p>Son rocas metálicas que orbitan al Sol, principalmente entre Marte y Júpiter. No tienen cola.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="examen" class="module">
+                <h1>Evaluación Final</h1>
+                <p>Responda las preguntas para certificarse.</p>
+
+                <div class="quiz-box">
+                    <form id="quizForm">
+                        <div class="question">
+                            <p><strong>1. ¿Qué porcentaje de masa del sistema solar posee el Sol?</strong></p>
+                            <label><input type="radio" name="p1" value="a"> 50%</label>
+                            <label><input type="radio" name="p1" value="b"> 99.86%</label>
+                            <label><input type="radio" name="p1" value="c"> 10%</label>
+                            <div id="fb1"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>2. ¿Cuál es la diferencia visual de un cometa?</strong></p>
+                            <label><input type="radio" name="p2" value="a"> Es rojo</label>
+                            <label><input type="radio" name="p2" value="b"> Tiene una cola brillante</label>
+                            <label><input type="radio" name="p2" value="c"> Es cuadrado</label>
+                            <div id="fb2"></div>
+                        </div>
+
+                        <div class="question">
+                            <p><strong>3. ¿Dónde están la mayoría de los asteroides?</strong></p>
+                            <label><input type="radio" name="p3" value="a"> Cerca del Sol</label>
+                            <label><input type="radio" name="p3" value="b"> Entre Marte y Júpiter</label>
+                            <label><input type="radio" name="p3" value="c"> En la Tierra</label>
+                            <div id="fb3"></div>
+                        </div>
+
+                        <button type="button" class="btn-primary" onclick="calificar()">Enviar Respuestas</button>
+                    </form>
+                    <div id="resultadoFinal" class="score-final"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function nav(id, el) {
+            document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            el.classList.add('active');
+            document.querySelector('main').scrollTop = 0;
+        }
+
+        function calificar() {
+            let puntaje = 0;
+            const form = document.getElementById('quizForm');
+            const total = 3;
+            document.querySelectorAll('[id^="fb"]').forEach(el => el.innerHTML = '');
+
+            const r = { p1: 'b', p2: 'b', p3: 'b' };
+            
+            validar(form.p1, r.p1, 'fb1', 'El Sol es masivo.');
+            validar(form.p2, r.p2, 'fb2', 'El hielo se sublima creando la cola.');
+            validar(form.p3, r.p3, 'fb3', 'En el cinturón de asteroides.');
+
+            function validar(input, correcta, divId, explicacion) {
+                const div = document.getElementById(divId);
+                if(input.value === correcta) {
+                    puntaje++;
+                    div.innerHTML = `<div class="msg-correct">✅ ¡Correcto!</div>`;
+                } else {
+                    div.innerHTML = `<div class="msg-wrong">❌ Incorrecto. ${explicacion}</div>`;
+                }
+            }
+
+            const finalDiv = document.getElementById('resultadoFinal');
+            finalDiv.style.display = 'block';
+            finalDiv.innerHTML = puntaje === total ? 
+                `<div style="color:green">🌟 ¡PERFECTO! ${puntaje}/${total}</div>` : 
+                `<div style="color:orange">⚠️ OBTUVISTE ${puntaje}/${total}.</div>`;
+        }
+    </script>
+</body>
+</html>
